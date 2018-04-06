@@ -44,6 +44,14 @@
       <version>0.9.5.2</version>
     </dependency>
 
+    <!--引入druid连接池-->
+    <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.6</version>
+    </dependency>
+
 
     <!-- DAO: MyBatis -->
     <dependency>

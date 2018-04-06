@@ -10,22 +10,52 @@
   <context:property-placeholder location="classpath:jdbc.properties" />
 
   <!-- 2.数据库连接池 -->
-  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-    <!-- 配置连接池属性 -->
-    <property name="driverClass" value="${jdbc.driver}" />
-    <property name="jdbcUrl" value="${jdbc.url}" />
-    <property name="user" value="${jdbc.username}" />
-    <property name="password" value="${jdbc.password}" />
+  <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+    <!--&lt;!&ndash; 配置连接池属性 &ndash;&gt;-->
+    <!--<property name="driverClass" value="${jdbc.driver}" />-->
+    <!--<property name="jdbcUrl" value="${jdbc.url}" />-->
+    <!--<property name="user" value="${jdbc.username}" />-->
+    <!--<property name="password" value="${jdbc.password}" />-->
 
-    <!-- c3p0连接池的私有属性 -->
-    <property name="maxPoolSize" value="30" />
-    <property name="minPoolSize" value="10" />
-    <!-- 关闭连接后不自动commit -->
-    <property name="autoCommitOnClose" value="false" />
-    <!-- 获取连接超时时间 -->
-    <property name="checkoutTimeout" value="10000" />
-    <!-- 当获取连接失败重试次数 -->
-    <property name="acquireRetryAttempts" value="2" />
+    <!--&lt;!&ndash; c3p0连接池的私有属性 &ndash;&gt;-->
+    <!--<property name="maxPoolSize" value="30" />-->
+    <!--<property name="minPoolSize" value="10" />-->
+    <!--&lt;!&ndash; 关闭连接后不自动commit &ndash;&gt;-->
+    <!--<property name="autoCommitOnClose" value="false" />-->
+    <!--&lt;!&ndash; 获取连接超时时间 &ndash;&gt;-->
+    <!--<property name="checkoutTimeout" value="10000" />-->
+    <!--&lt;!&ndash; 当获取连接失败重试次数 &ndash;&gt;-->
+    <!--<property name="acquireRetryAttempts" value="2" />-->
+  <!--</bean>-->
+
+  <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <property name="url" value="${jdbc.url}" />
+    <property name="driverClassName" value="${jdbc.driver}"/>
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+    <!-- 配置初始化大小、最小、最大 -->
+    <property name="initialSize" value="0" />
+    <property name="minIdle" value="0" />
+    <property name="maxActive" value="20" />
+    <!-- 配置获取连接等待超时的时间 -->
+    <property name="maxWait" value="60000" />
+    <!-- 这里建议配置为TRUE，防止取到的连接不可用。获取链接的时候，不校验是否可用，开启会有损性能-->
+    <property name="testOnBorrow" value="true" />
+    <!-- 归还链接到连接池的时候校验链接是否可用 -->
+    <property name="testOnReturn" value="false" />
+    <!-- 此项配置为true即可，不影响性能，并且保证安全性。意义为：申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效 -->
+    <property name="testWhileIdle" value="true" />
+    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+    <!-- 配置一个连接在池中最小生存的时间，单位毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="300000" />
+    <!-- 链接使用超过时间限制是否回收 -->
+    <property name="removeAbandoned" value="true" />
+    <!-- 超过时间限制时间（单位秒），目前为5分钟，如果有业务处理时间超过5分钟，可以适当调整。 -->
+    <property name="removeAbandonedTimeout" value="300" />
+    <!-- #链接回收的时候控制台打印信息，测试环境可以加上true，线上环境false。会影响性能。 -->
+    <property name="logAbandoned" value="true" />
+    <!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
   </bean>
 
   <!-- 3.配置SqlSessionFactory对象 -->

@@ -10,6 +10,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.37" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.2" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.6" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.0" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.3" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />

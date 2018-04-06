@@ -145,7 +145,15 @@
       <artifactId>spring-test</artifactId>
       <version>4.3.7.RELEASE</version>
     </dependency>
-  </dependencies>·
+
+    <!--分页-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+
+  </dependencies>
   <build>
     <finalName>BookSystem_V0</finalName>
     <plugins>

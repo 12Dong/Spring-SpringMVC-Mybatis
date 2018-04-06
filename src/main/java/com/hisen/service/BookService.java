@@ -11,7 +11,7 @@ public interface BookService {
   Book getByIdWithPic(long bookId);
 
   List<Book> getList(int start, int pageNum);
-  List<Book> getListWithPic(int start, int pageNum);
+  List<Book> getListWithPic();
   int addBook(Book book);
   int updateBook(Book book);
   int deleteBookById(long id);

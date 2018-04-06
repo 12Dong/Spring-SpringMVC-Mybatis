@@ -3,6 +3,7 @@ package com.hisen.web;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hisen.entity.Book;
+import com.hisen.entity.Message;
 import com.hisen.service.BookService;
 import java.util.List;
 //import org.slf4j.Logger;
@@ -22,6 +23,19 @@ public class BookController {
 
   @Autowired
   private BookService bookService;
+
+  //需要倒入Jackson包
+  @RequestMapping("/ReturnJson")
+  @ResponseBody //自动将结果转为Json字符串
+  public Message getBookWithJson(@RequestParam(value = "pn",defaultValue = "1")Integer pn){
+    PageHelper.startPage(pn,5);
+    List<Book> list = bookService.getListWithPic();
+    PageInfo page = new PageInfo(list,5);
+    return Message.success().add("pageInfo",page);
+    //浏览器收到发送的字符串
+  }
+
+
 
 //  查询书籍目录 分页查询
   @RequestMapping("/Newlist")

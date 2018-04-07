@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PicDao {
     Pic queryById(long id);
-    List<Pic> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+    List<Pic> queryAll();
 }

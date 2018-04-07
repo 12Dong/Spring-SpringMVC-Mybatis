@@ -45,30 +45,32 @@
 
 
                     <div class="form-group">
-                        <label for="bookName_add" name="name" class="col-sm-2 control-label">图书名</label>
+                        <label for="bookName_add"  class="col-sm-2 control-label">图书名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="bookName_add" placeholder="bookName">
+                            <input type="text" class="form-control" name="name" id="bookName_add" placeholder="bookName">
+                            <span></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="bookNum_add" name="number" class="col-sm-2 control-label">图书数量</label>
+                        <label for="bookNum_add"  class="col-sm-2 control-label">图书数量</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="bookNum_add" placeholder="bookNum">
+                            <input type="text" class="form-control" name="number" id="bookNum_add" placeholder="bookNum">
+                            <span></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="bookDetail_add" name="detail" class="col-sm-2 control-label">图书信息</label>
+                        <label for="bookDetail_add"  class="col-sm-2 control-label">图书信息</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="bookDetail_add" placeholder="bookDetail">
+                            <input type="text" class="form-control" name="detail" id="bookDetail_add" placeholder="bookDetail">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">图片Id</label>
                         <%--图片Id--%>
-                        <select class="form-control" name="picId">
+                        <select class="form-control" name="picId" id="Pic_select">
 
                         </select>
                     </div>
@@ -87,7 +89,78 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" id="book_save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--======================================书籍修改模态框======================================--%>
+<div class="modal fade" id="bookUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myUpdateLabel">图书添加</h4>
+            </div>
+            <div class="modal-body">
+                <%--=====================表单=====================    --%>
+                <form class="form-horizontal">
+
+                    <%--private long bookId;--%>
+                    <%--private String name;--%>
+                    <%--private int number;--%>
+                    <%--private String detail;--%>
+                    <%--private String picId;--%>
+                    <%--private Pic pic;--%>
+
+
+                    <div class="form-group">
+                        <label for="bookName_add"  class="col-sm-2 control-label">图书名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="bookName_update" placeholder="bookName">
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookNum_add"  class="col-sm-2 control-label">图书数量</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="number" id="bookNum_update" placeholder="bookNum">
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookDetail_add"  class="col-sm-2 control-label">图书信息</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="detail" id="bookDetail_update" placeholder="bookDetail">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片Id</label>
+                        <%--图片Id--%>
+                        <select class="form-control" name="picId" id="Pic_select">
+
+                        </select>
+                    </div>
+
+
+
+
+
+                    <%--<div class="form-group">--%>
+                    <%--<div class="col-sm-offset-2 col-sm-10">--%>
+                    <%--<button type="submit" class="btn btn-default">Sign in</button>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="book_update_btn">修改</button>
             </div>
         </div>
     </div>
@@ -142,6 +215,7 @@
 </div>
 
     <script type="text/javascript">
+        var totalRecord;
     // 页面加载完成之后 发送Ajax请求 请求分页数据
     $(function() {
         toPage(1);
@@ -182,8 +256,10 @@
         var detail = $("<td></td>").append(item.detail);
         var picId = $("<td></td>").append(item.picId);
         var pic = $("<td></td>").append(item.pic.pic);
-        var editBtn = $("<button></button>").addClass("btn btn-primary").append("编辑");
-        var deleteBtn = $("<button></button>").addClass("btn btn-danger").append("删除");
+        // 为编辑按钮添加自定义 表现当前员工Id
+        var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append("编辑");
+        editBtn.attr("edit_id",item.bookId);
+        var deleteBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append("删除");
         var btnTd = $("<td></td>").append(editBtn).append(deleteBtn);
         // <button class="btn btn-primary">新增</button>
         //         <button class="btn btn-danger">删除</button>
@@ -196,6 +272,7 @@
     function build_page_info(result){
         $("#page_info_area").empty();
         $("#page_info_area").append("当前第"+result.extend.pageInfo.pageNum+"页,共"+result.extend.pageInfo.pages+"页,总共"+result.extend.pageInfo.total+"条");
+        totalRecord = result.extend.pageInfo.pages;
     }
     //解析分页条数据
     function build_page_nav(result){
@@ -253,11 +330,218 @@
     // </li>
     // </ul>
     // </nav>
+    //点击新增按钮 淡出模态框
         $("#book_add_modal_btn").click(function(){
+            // 刷新表单 数据与样式
+            reset_form("#bookAddModal form");
+            //发出ajax请求 查处PicId信息 显示在下拉列表中
+            getPicId("#Pic_select");
+
+            //弹出模态框
             $("#bookAddModal").modal({
                 backdrop:"static"
             })
+    });
+    function reset_form(ele){
+        //清空数据
+        $(ele)[0].reset();
+        //清空样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find("span").text("");
+
+    }
+    function getPicId(ele) {
+        $.ajax({
+            url:"${APP_PATH}/Pic",
+            type:"GET",
+            success:function (result) {
+                console.log(result);
+                $(ele).empty();
+                $.each(result.extend.Pic,function(index,item){
+                    var option = $("<option></option>").append(item.pic).attr("value",item.picId);
+                    option.appendTo(ele);
+                    //option.appendTo("#Pic_select");
+                })
+            }
+        })
+
+    }
+
+    function validate_add_form() {
+        // 拿到数据
+        // 使用正则表达式分割
+
+        var bookName = $("#bookName_add").val();
+        var regName = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,7}$)/;
+        if(!regName.test(bookName)){
+            // alert("用户名可以是2-5位中文或3-16英文数字");
+            $("#bookName_add").parent().removeClass("has-success has-error");
+            $("#bookName_add").next("span").text("");
+            $("#bookName_add").parent().addClass("has-error");
+            $("#bookName_add").next().text("用户名可以是2-5位中文或3-16英文数字");
+            return false;
+        }else{
+            $("#bookName_add").parent().removeClass("has-success has-error");
+            $("#bookName_add").next("span").text("");
+            $("#bookName_add").parent().addClass("has-success");
+            $("#bookName_add").next("span").text("");
+        }
+        var bookNum = $("#bookNum_add").val();
+        regName = /^[0-9]*$/;
+        if(!regName.test(bookNum)){
+            // alert("数量必须为数字");
+            $("#bookNum_add").parent().removeClass("has-success has-error");
+            $("#bookNum_add").next("span").text("");
+            $("#bookNum_add").parent().addClass("has-error");
+            $("#bookNum_add").next("span").text("数量必须为数字");
+            return false;
+        }else{
+            $("#bookNum_add").parent().removeClass("has-success has-error");
+            $("#bookNum_add").next("span").text("");
+            $("#bookNum_add").parent().addClass("has-success");
+            $("#bookNum_add").next("span").text("");
+        }
+        return true;
+
+    }
+    $("#book_save_btn").click(function () {
+        // 先校验信息
+        if(!validate_add_form()){
+            return false;
+        }
+
+        if($(this).attr("ajax-va")=="fail") return;
+        // 将填写的表单数据 提交给Controller执行
+        $.ajax({
+            url:"${APP_PATH}/book",
+            type:"POST",
+            data: $("#bookAddModal form").serialize(),
+            success:function(result){
+                alert(result.message);
+                if(result.code==100){
+                    // 关闭模态框
+                    $("#bookAddModal").modal('hide');
+                    //到最后一页 显示增加对象
+                    toPage(totalRecord);
+                }else{
+                    console.log(result);
+                    // 那个错 显示那个
+                    if(underfined != result.extend.errorFields.name){
+                        $("#bookName_add").parent().removeClass("has-success has-error");
+                        $("#bookName_add").next("span").text("");
+                        $("#bookName_add").parent().addClass("has-error");
+                        $("#bookName_add").next().text("用户名可以是2-5位中文或3-16英文数字");
+                    }
+                }
+
+            }
+
     })
+    })
+
+
+        $("#bookName_add").change(function () {
+            // 发送ajax校验是否可用
+            var bookName =this.value;
+            $.ajax({
+                url:"${APP_PATH}/checkBookName",
+                data:"name="+bookName,
+                type:"POST",
+                success:function(result){
+                    alert(result.extend);
+                    if(result.code==100){
+                        $("#bookName_add").parent().removeClass("has-success has-error");
+                        $("#bookName_add").next("span").text("");
+                        $("#bookName_add").parent().addClass("has-success");
+                        $("#bookName_add").next("span").text("用户名可用");
+                        $("#book_save_btn").attr("ajax-va","success");
+                    }else{
+                        $("#bookName_add").parent().removeClass("has-success has-error");
+                        $("#bookName_add").next("span").text("");
+                        $("#bookName_add").parent().addClass("has-error");
+                        $("#bookName_add").next().text(result.extend.va_message);
+                        $("#book_save_btn").attr("ajax-va","fail");
+
+                    }
+                }
+            })
+        })
+
+        // 配置修改模态
+        $(document).on("click",".edit_btn",function () {
+            // alert("花Q");
+            //查询员工信息 并显示员工信息
+            // 查处部门信息 并显示 部门列表
+            getPicId("#bookUpdateModal select");
+            getBook($(this).attr("edit_id"));
+            $("#book_update_btn").attr("edit_id",$(this).attr("edit_id"));
+            $("#bookUpdateModal").modal({
+                backdrop:"static"
+            })
+        });
+
+    function getBook(id){
+        $.ajax({
+            url:"${APP_PATH}/book/"+id,
+            type:"GET",
+            success:function(result){
+                console.log(result);
+                var book = result.extend.book;
+                $("#bookName_update").val(book.name);
+                $("#bookNum_update").val(book.number);
+                $("#bookDetail_update").val(book.detail);
+                $("#bookUpdateModal select").val([parseInt(book.picId)]);
+            }
+        })
+    }
+
+    // 点击更新按钮
+        $("#book_update_btn").click(function(){
+            //表单验证
+            // 拿到数据
+            // 使用正则表达式分割
+
+            var bookName = $("#bookName_update").val();
+            var regName = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,7}$)/;
+            if(!regName.test(bookName)){
+                // alert("用户名可以是2-5位中文或3-16英文数字");
+                $("#bookName_update").parent().removeClass("has-success has-error");
+                $("#bookName_update").next("span").text("");
+                $("#bookName_update").parent().addClass("has-error");
+                $("#bookName_update").next().text("用户名可以是2-5位中文或3-16英文数字");
+                return false;
+            }else{
+                $("#bookName_update").parent().removeClass("has-success has-error");
+                $("#bookName_update").next("span").text("");
+                $("#bookName_update").parent().addClass("has-success");
+                $("#bookName_update").next("span").text("");
+            }
+            var bookNum = $("#bookNum_update").val();
+            regName = /^[0-9]*$/;
+            if(!regName.test(bookNum)){
+                // alert("数量必须为数字");
+                $("#bookNum_update").parent().removeClass("has-success has-error");
+                $("#bookNum_update").next("span").text("");
+                $("#bookNum_update").parent().addClass("has-error");
+                $("#bookNum_update").next("span").text("数量必须为数字");
+                return false;
+            }else{
+                $("#bookNum_update").parent().removeClass("has-success has-error");
+                $("#bookNum_update").next("span").text("");
+                $("#bookNum_update").parent().addClass("has-success");
+                $("#bookNum_update").next("span").text("");
+            }
+
+            // 发送Aajx请求
+            $.ajax({
+                url : "${APP_PATH}/book/" + $(this).attr("edit_id"),
+                type:"POST",
+                data:$("#bookUpdateModal form").serialize()+"&_method=PUT",
+                success:function (result) {
+                    alert(result.message);
+                }
+            })
+        })
 </script>
 </body>
 </html>

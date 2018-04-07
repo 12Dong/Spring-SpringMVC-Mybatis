@@ -177,7 +177,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
             <button class="btn btn-primary" id="book_add_modal_btn">新增</button>
-            <button class="btn btn-danger">删除</button>
+            <button class="btn btn-danger" >删除</button>
         </div>
     </div>
     <%--显示 表格数据--%>
@@ -215,7 +215,7 @@
 </div>
 
     <script type="text/javascript">
-        var totalRecord;
+        var totalRecord,currentRecord;
     // 页面加载完成之后 发送Ajax请求 请求分页数据
     $(function() {
         toPage(1);
@@ -260,6 +260,7 @@
         var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append("编辑");
         editBtn.attr("edit_id",item.bookId);
         var deleteBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append("删除");
+        deleteBtn.attr("delete_id",item.bookId);
         var btnTd = $("<td></td>").append(editBtn).append(deleteBtn);
         // <button class="btn btn-primary">新增</button>
         //         <button class="btn btn-danger">删除</button>
@@ -273,6 +274,7 @@
         $("#page_info_area").empty();
         $("#page_info_area").append("当前第"+result.extend.pageInfo.pageNum+"页,共"+result.extend.pageInfo.pages+"页,总共"+result.extend.pageInfo.total+"条");
         totalRecord = result.extend.pageInfo.pages;
+        currentRecord = result.extend.pageNum;
     }
     //解析分页条数据
     function build_page_nav(result){
@@ -533,14 +535,36 @@
             }
 
             // 发送Aajx请求
+            //PUT方法 tomcat不会封装请求
             $.ajax({
                 url : "${APP_PATH}/book/" + $(this).attr("edit_id"),
-                type:"POST",
-                data:$("#bookUpdateModal form").serialize()+"&_method=PUT",
+                type:"PUT",
+                data:$("#bookUpdateModal form").serialize(),
                 success:function (result) {
+                    $("#bookUpdateModal").modal('hide');
                     alert(result.message);
+                    // 回到本页面
+                    toPage(currentRecord);
                 }
             })
+        })
+        // 单个删除
+
+        $(document).on("click",".delete_btn",function () {
+            //1.弹出是否确认删除
+            var name=$(this).parents("tr").find("td:eq(1)").text()
+            if(confirm("确认删除["+name+"]吗?")){
+                //确认 发送ajax请求
+                $.ajax({
+                    url:"${APP_PATH}/book/"+$(this).attr("delete_id"),
+                    type:"DELETE",
+                    success:function (result) {
+                        console.log(result);
+                        alert(result.message);
+                        toPage(currentRecord);
+                    }
+                })
+            }
         })
 </script>
 </body>

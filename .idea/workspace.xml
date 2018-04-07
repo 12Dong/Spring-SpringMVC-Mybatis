@@ -7,42 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5820b24b-62d3-4122-8602-21acd22d4560" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/Test/testRegx.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/service/PicService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/service/impl/PicServiceImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/web/PicController.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BookSystem_V0_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/BookSystem_V0_war_exploded.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/BookSystem_V0.iml" afterPath="$PROJECT_DIR$/BookSystem_V0.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/dao/BookDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/dao/BookDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/dao/PicDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/dao/PicDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/entity/Book.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/entity/Book.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/service/BookService.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/service/BookService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/service/impl/BookServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/service/impl/BookServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java" afterPath="$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PicMapper" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PicMapper.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0.war" afterPath="$PROJECT_DIR$/target/BookSystem_V0.war" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/dao/BookDao.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/dao/BookDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/dao/PicDao.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/dao/PicDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/entity/Book.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/entity/Book.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/service/BookService.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/service/BookService.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/service/impl/BookServiceImpl.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/service/impl/BookServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/web/BookController.class" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/com/hisen/web/BookController.class" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/mapper/BookMapper.xml" afterPath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/mapper/BookMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/WEB-INF/classes/mapper/PicMapper" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/BookSystem_V0/index.jsp" afterPath="$PROJECT_DIR$/target/BookSystem_V0/index.jsp" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/dao/BookDao.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/dao/BookDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/dao/PicDao.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/dao/PicDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/entity/Book.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/entity/Book.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/service/BookService.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/service/BookService.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/service/impl/BookServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/service/impl/BookServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hisen/web/BookController.class" afterPath="$PROJECT_DIR$/target/classes/com/hisen/web/BookController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/BookMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/BookMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PicMapper" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,8 +37,8 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="537" column="26" lean-forward="false" selection-start-line="537" selection-start-column="26" selection-end-line="537" selection-end-column="26" />
+            <state relative-caret-position="220">
+              <caret line="563" column="46" lean-forward="false" selection-start-line="563" selection-start-column="46" selection-end-line="563" selection-end-column="46" />
               <folding>
                 <element signature="e#1301#1308#1#HTML" expanded="true" />
                 <element signature="e#4426#4433#1#HTML" expanded="true" />
@@ -97,8 +64,8 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+            <state relative-caret-position="117">
+              <caret line="38" column="43" lean-forward="false" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -137,11 +104,11 @@
       <file leaf-file-name="BookController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+            <state relative-caret-position="903">
+              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2149#2164#0" expanded="true" />
+                <element signature="e#2197#2212#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -197,10 +164,8 @@
       <find>图书信息</find>
       <find>button</find>
       <find>100</find>
-      <find>click</find>
       <find>modal</find>
       <find>reset</find>
-      <find>hide</find>
       <find>应该</find>
       <find>应该必须</find>
       <find>save</find>
@@ -215,6 +180,11 @@
       <find>reg</find>
       <find>edit_id</find>
       <find>bookUpdate</find>
+      <find>hide</find>
+      <find>page_nav</find>
+      <find>当前</find>
+      <find>删除</find>
+      <find>click</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -256,8 +226,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/hisen/Test/testRegx.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hisen/entity/Book.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
       </list>
@@ -851,7 +821,7 @@
       <workItem from="1522817806231" duration="473000" />
       <workItem from="1522821869318" duration="1022000" />
       <workItem from="1522824962056" duration="18845000" />
-      <workItem from="1522928573191" duration="49115000" />
+      <workItem from="1522928573191" duration="51596000" />
     </task>
     <servers />
   </component>
@@ -861,11 +831,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69455000" />
+    <option name="totallyTimeSpent" value="71936000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="246" y="105" width="1081" height="717" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -885,7 +854,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3971061" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3971061" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2820019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1232,14 +1201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/PicMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1294,17 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2149#2164#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index-2.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -1313,10 +1263,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="38" column="43" lean-forward="false" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hisen/web/BookController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="903">
+          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2197#2212#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="537" column="26" lean-forward="false" selection-start-line="537" selection-start-column="26" selection-end-line="537" selection-end-column="26" />
+        <state relative-caret-position="220">
+          <caret line="563" column="46" lean-forward="false" selection-start-line="563" selection-start-column="46" selection-end-line="563" selection-end-column="46" />
           <folding>
             <element signature="e#1301#1308#1#HTML" expanded="true" />
             <element signature="e#4426#4433#1#HTML" expanded="true" />

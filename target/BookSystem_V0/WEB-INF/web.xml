@@ -31,6 +31,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+      <filter-name>httpPutFormContentFilte</filter-name>
+      <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>httpPutFormContentFilte</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

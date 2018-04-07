@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,6 +115,13 @@ public class BookController {
     bookService.updateBook(book);
     return Message.success();
   }
+
+  @RequestMapping(value="/book/{id}",method = RequestMethod.DELETE)
+  @ResponseBody
+  public Message deleteBook(@PathVariable("id") long id){
+      bookService.deleteBookById(id);
+      return Message.success();
+  }
 //  @RequestMapping(value = "/detail/{bookId}", method = RequestMethod.GET)
 //  private String detail(@PathVariable("bookId") Long bookId, Model model) {
 //    Book book = bookService.getById(bookId);
@@ -138,4 +146,5 @@ public class BookController {
 //    int i = bookService.deleteBookById(id);
 //    return i > 0 ? "success" : "error";
 //  }
+
 }

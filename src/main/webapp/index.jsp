@@ -24,6 +24,74 @@
             src="${APP_PATH}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%--书籍添加模态框--%>
+<div class="modal fade" id="bookAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">图书添加</h4>
+            </div>
+            <div class="modal-body">
+                <%--=====================表单=====================    --%>
+                <form class="form-horizontal">
+
+                    <%--private long bookId;--%>
+                    <%--private String name;--%>
+                    <%--private int number;--%>
+                    <%--private String detail;--%>
+                    <%--private String picId;--%>
+                    <%--private Pic pic;--%>
+
+
+                    <div class="form-group">
+                        <label for="bookName_add" name="name" class="col-sm-2 control-label">图书名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="bookName_add" placeholder="bookName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookNum_add" name="number" class="col-sm-2 control-label">图书数量</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="bookNum_add" placeholder="bookNum">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookDetail_add" name="detail" class="col-sm-2 control-label">图书信息</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="bookDetail_add" placeholder="bookDetail">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片Id</label>
+                        <%--图片Id--%>
+                        <select class="form-control" name="picId">
+
+                        </select>
+                    </div>
+
+
+
+
+
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-sm-offset-2 col-sm-10">--%>
+                            <%--<button type="submit" class="btn btn-default">Sign in</button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <%--显示页面 使用bootstrap--%>
 <div class="container">
     <%--标题行--%>
@@ -35,7 +103,7 @@
     <%--按钮--%>
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
-            <button class="btn btn-primary">新增</button>
+            <button class="btn btn-primary" id="book_add_modal_btn">新增</button>
             <button class="btn btn-danger">删除</button>
         </div>
     </div>
@@ -185,6 +253,11 @@
     // </li>
     // </ul>
     // </nav>
+        $("#book_add_modal_btn").click(function(){
+            $("#bookAddModal").modal({
+                backdrop:"static"
+            })
+    })
 </script>
 </body>
 </html>

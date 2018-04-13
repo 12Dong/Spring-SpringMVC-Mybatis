@@ -35,15 +35,6 @@
             <div class="modal-body">
                 <%--=====================表单=====================    --%>
                 <form class="form-horizontal">
-
-                    <%--private long bookId;--%>
-                    <%--private String name;--%>
-                    <%--private int number;--%>
-                    <%--private String detail;--%>
-                    <%--private String picId;--%>
-                    <%--private Pic pic;--%>
-
-
                     <div class="form-group">
                         <label for="bookName_add"  class="col-sm-2 control-label">图书名</label>
                         <div class="col-sm-10">
@@ -106,15 +97,6 @@
             <div class="modal-body">
                 <%--=====================表单=====================    --%>
                 <form class="form-horizontal">
-
-                    <%--private long bookId;--%>
-                    <%--private String name;--%>
-                    <%--private int number;--%>
-                    <%--private String detail;--%>
-                    <%--private String picId;--%>
-                    <%--private Pic pic;--%>
-
-
                     <div class="form-group">
                         <label for="bookName_add"  class="col-sm-2 control-label">图书名</label>
                         <div class="col-sm-10">
@@ -146,15 +128,6 @@
                         </select>
                     </div>
 
-
-
-
-
-                    <%--<div class="form-group">--%>
-                    <%--<div class="col-sm-offset-2 col-sm-10">--%>
-                    <%--<button type="submit" class="btn btn-default">Sign in</button>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
                 </form>
 
             </div>
@@ -165,6 +138,10 @@
         </div>
     </div>
 </div>
+
+
+
+<%--=============================================================--%>
 <%--显示页面 使用bootstrap--%>
 <div class="container">
     <%--标题行--%>
@@ -313,25 +290,7 @@
         nav.appendTo("#page_nav_area");
 
     }
-    // <nav aria-label="Page navigation">
-    //     <ul class="pagination">
-    //     <li>
-    //     <a href="#" aria-label="Previous">
-    //     <span aria-hidden="true">&laquo;</span>
-    // </a>
-    // </li>
-    // <li><a href="#">1</a></li>
-    // <li><a href="#">2</a></li>
-    // <li><a href="#">3</a></li>
-    // <li><a href="#">4</a></li>
-    // <li><a href="#">5</a></li>
-    // <li>
-    // <a href="#" aria-label="Next">
-    //     <span aria-hidden="true">&raquo;</span>
-    // </a>
-    // </li>
-    // </ul>
-    // </nav>
+
     //点击新增按钮 淡出模态框
         $("#book_add_modal_btn").click(function(){
             // 刷新表单 数据与样式
@@ -561,6 +520,7 @@
                     success:function (result) {
                         console.log(result);
                         alert(result.message);
+                        toPage(currentRecord);
                     }
                 })
             }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.BookClassDao">
+    <select id="queryById" resultType="BookClass" parameterType="String">
+        SELECT
+        ISBN,
+        bookName,
+        author,
+        publishCompany,
+        date_format(publishDate,'%Y-%m-%d') AS publishDate,
+        bookNum
+        from
+        bookClass
+        where
+        ISBN = #{ISBN}
+    </select>
+
+    <select id="queryAll" resultType="BookClass">
+        SELECT
+        ISBN,
+        bookName,
+        author,
+        publishCompany,
+        date_format(publishDate,'%Y-%m-%d') AS publishDate,
+        bookNum
+        from
+        bookClass
+        ORDER BY
+        ISBN
+    </select>
+
+    <select id="queryBySelective" parameterType="BookClass" resultType="BookClass">
+        select
+        ISBN,
+        bookName,
+        author,
+        publishCompany,
+        date_format(publishDate,'%Y-%m-%d') AS publishDate,
+        bookNum
+        from
+        bookClass
+        <where>
+            <if test="ISBN != null">
+                And ISBN = #{ISBN}
+            </if>
+            <if test="bookName !=null">
+                and bookName like '%${bookName}%'
+            </if>
+            <if test="author !=null">
+                and author like '%${author}%'
+            </if>
+            <if test="publishCompany !=null">
+                and publishCompany like '%${publishCompany}%'
+            </if>
+            <if test="publishDate !=null">
+                and publishDate = #{publishDate}
+            </if>
+            <if test="bookNum !=0">
+                and bookNum = #{bookNum}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="BookClass">
+        update bookClass
+        SET
+        bookName = #{bookName},
+        author = #{author},
+        publishCompany = #{publishCompany},
+        publishDate = #{publishDate},
+        bookNum = #{bookNum}
+        where
+        ISBN = #{ISBN}
+    </update>
+
+    <delete id="deleteById" parameterType="String">
+        delete from bookClass
+        where
+        ISBN = #{ISBN}
+    </delete>
+
+    <insert id="insertBookClass" parameterType="BookClass">
+        insert into bookClass(ISBN,bookName,author,publishCompany,publishDate,bookNum)
+        VALUES
+        (#{ISBN},#{bookName},#{author},#{publishCompany},#{publishDate},#{bookNum})
+    </insert>
+
+</mapper>

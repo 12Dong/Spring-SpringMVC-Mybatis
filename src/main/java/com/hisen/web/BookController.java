@@ -9,8 +9,6 @@ import com.hisen.service.BookService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,8 +88,6 @@ public class BookController {
   public Message checkBookName(@RequestParam("name") String bookName){
 
     String regx = "^[\\u2E80-\\u9FFF]{2,7}$";
-    System.out.println(bookName);
-    System.out.println(bookName.matches(regx));
     if(bookName.matches(regx)==false) return Message.fail().add("va_message","用户名应该是是2-5位中文或3-16英文数字");
     boolean flag=bookService.checkBookName(bookName);
     if(flag) return Message.success();

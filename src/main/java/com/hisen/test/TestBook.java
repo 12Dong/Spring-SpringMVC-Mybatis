@@ -1,4 +1,4 @@
-package com.hisen.Test;
+package com.hisen.test;
 
 public class TestBook {
 }

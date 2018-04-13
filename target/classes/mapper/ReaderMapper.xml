@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ReaderDao">
+    <select id="queryById" resultType="Reader" parameterType="long">
+        <!-- 具体的sql -->
+        SELECT
+        readerId,
+        name,
+        telephone,
+        email
+        FROM
+        reader
+        WHERE
+        readerId = #{readerId}
+    </select>
+    <select id="queryAll" resultType="Reader">
+        SELECT
+        readerId,
+        name,
+        telephone,
+        email
+        FROM
+        reader
+        ORDER BY
+        readerId
+    </select>
+
+    <select id="queryBySelective" parameterType="Reader" resultType="Reader">
+        select
+        *
+        from reader
+        <where>
+            <if test="name != null">
+                And name like '%${name}%'
+            </if>
+            <if test="telephone !=null">
+                And telephone = #{telephone}
+            </if>
+            <if test="email !=null">
+                And email = #{email}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="Reader">
+        update reader
+        SET
+        name = #{name},
+        telephone = #{telephone},
+        email = #{email}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        delete from reader
+        where readerId = #{readerId}
+    </delete>
+
+    <insert id="insertReader" parameterType="Reader">
+        insert into reader(name,telephone,email)
+        VALUES (#{name},#{telephone},#{email})
+    </insert>
+
+</mapper>

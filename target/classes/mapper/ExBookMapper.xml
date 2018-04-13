@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ExBookDao">
+    <select id="queryById" resultType="ExBook" parameterType="String">
+        SELECT
+        *
+        from
+        Book
+        where
+        bookId = #{bookId}
+    </select>
+
+    <select id="queryAll" parameterType="String" resultType="ExBook">
+        SELECT
+        *
+        FROM
+        Book
+        where ISBN = #{ISBN}
+        ORDER BY
+        bookId
+    </select>
+
+    <select id="queryBySelective" parameterType="ExBook" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        <where>
+            <if test="bookId!=null">
+                and bookId = #{bookId}
+            </if>
+            <if test="ISBN !=null">
+                and ISBN = #{ISBN}
+            </if>
+            <if test="status !=null">
+                and status = #{status}
+            </if>
+            <if test="managerId !=null">
+                and managerId = #{managerId}
+            </if>
+            <if test="readerId !=null">
+                and readerId = #{readerId}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="ExBook">
+        update Book
+        SET
+        ISBN = #{ISBN},
+        location = #{ISBN},
+        status = #{status},
+        managerId = #{managerId},
+        readerId = #{readerId}
+        where
+        bookId = #{bookId}
+    </update>
+
+    <delete id="deleteById" parameterType="String">
+        delete from Book
+        where
+        bookId = #{bookId}
+    </delete>
+
+    <insert id="insertExBook" parameterType="ExBook">
+        insert into
+        Book(bookId,ISBN,location,status,managerId,readerId)
+        VALUES (#{bookId},#{ISBN},#{location},#{status},#{managerId},#{readerId})
+    </insert>
+
+    <select id="queryAllByISBN" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        where
+        ISBN = #{ISBN}
+        order by bookId
+    </select>
+
+    <update id="rendBook" parameterType="ExBook">
+        update Book
+        set
+        managerId = #{managerId},
+        readerId = #{readerId},
+        status = '已借出'
+        where bookId = #{bookId}
+    </update>
+
+    <select id="queryALLablee" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        where
+        status = '未借出'
+        and
+        ISBN = #{ISBN}
+        order by
+        bookId
+    </select>
+
+    <resultMap id="ExBookWithBookClass" type="ExBook">
+        <id column="bookId" property="bookId"/>
+        <result column="ISBN" property="ISBN"/>
+        <result column="status" property="status"/>
+        <association property="bookClass" javaType="BookClass">
+            <id column="ISBN" property="ISBN"/>
+            <result column="bookName" property="bookName"/>
+        </association>
+    </resultMap>
+    <select id="queryRendBookByReaderId" parameterType="String" resultMap="ExBookWithBookClass">
+        select
+        bookId,
+        status,
+        bookName,
+        Book.ISBN as ISBN
+        from Book,bookClass
+        where
+        Book.ISBN = bookClass.ISBN
+        and
+        readerId = #{readerId}
+    </select>
+
+</mapper>

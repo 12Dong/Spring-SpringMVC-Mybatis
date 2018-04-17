@@ -14,4 +14,14 @@ public interface ExBookService {
     List<ExBook> queryALlable(String ISBN);
 
     List<ExBook> queryRendBookByReaderId(String readerId);
+
+    void returnBookByBookId(String bookId);
+
+    ExBook selectLastExBook(String ISBN);
+    void addNewBook(ExBook exBook);
+
+    void deleteByBookId(String bookId);
+
+    int searchNumByISBN(String ISBN);
+
 }

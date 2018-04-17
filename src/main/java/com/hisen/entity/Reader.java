@@ -1,16 +1,16 @@
 package com.hisen.entity;
 
 public class Reader {
-    private long readerId;
+    private String readerId;
     private String name;
     private String telephone;
     private String email;
 
-    public long getReaderId() {
+    public String getReaderId() {
         return readerId;
     }
 
-    public void setReaderId(long readerId) {
+    public void setReaderId(String readerId) {
         this.readerId = readerId;
     }
 

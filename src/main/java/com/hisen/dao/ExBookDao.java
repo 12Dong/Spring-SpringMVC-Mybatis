@@ -17,4 +17,11 @@ public interface ExBookDao {
 
     List<ExBook> queryRendBookByReaderId(String readerId);
 
+    void returnBookByBookId(String bookId);
+
+    ExBook selectLast(String ISBN);
+
+    void deleteByBookId(String bookId);
+
+    List<ExBook> selectByISBN(String ISBN);
 }

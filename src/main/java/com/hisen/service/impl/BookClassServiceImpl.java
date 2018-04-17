@@ -23,4 +23,24 @@ public class BookClassServiceImpl implements BookClassService{
     public List<BookClass> querySelective(BookClass bookClass) {
         return bookClassDao.queryBySelective(bookClass);
     }
+
+    @Override
+    public void addNewBookClass(BookClass bookClass) {
+        bookClassDao.insertBookClass(bookClass);
+    }
+
+    @Override
+    public void BookClassNumAdd1(String ISBN) {
+        bookClassDao.addBookClassNum(ISBN);
+    }
+
+    @Override
+    public void BookClassNumMinus1(String ISBN) {
+        bookClassDao.minusBookClassNum(ISBN);
+    }
+
+    @Override
+    public void deleteBookClassByISBN(String ISBN) {
+        bookClassDao.deleteByISBN(ISBN);
+    }
 }

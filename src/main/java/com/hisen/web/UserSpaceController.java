@@ -34,4 +34,12 @@ public class UserSpaceController {
         List<ExBook> list = exBookService.queryRendBookByReaderId(readerId);
         return Message.success().add("list",list);
     }
+
+    @RequestMapping(value="/readerReturnBook",method = RequestMethod.PUT)
+    @ResponseBody
+    public Message readerReturn(@RequestParam("bookId")String bookId){
+            System.out.println(bookId);
+            exBookService.returnBookByBookId(bookId);
+            return Message.success();
+    }
 }

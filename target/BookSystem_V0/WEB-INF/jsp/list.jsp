@@ -68,7 +68,7 @@
 
 
                         <td>
-                            <a href="<%=appPath%>/book/detail/${book.bookId}">详情</a> |
+                            <a href="<%=appPath%>/book/detail/${book.bookId}">详情</a>
                             <a href="<%=appPath%>/book/del/${book.bookId}">删除</a>
                         </td>
 

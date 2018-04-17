@@ -87,4 +87,21 @@
         (#{ISBN},#{bookName},#{author},#{publishCompany},#{publishDate},#{bookNum})
     </insert>
 
+    <update id="addBookClassNum" parameterType="String">
+        update bookClass
+        set bookNum = bookNum+1
+        where ISBN = #{ISBN}
+    </update>
+
+    <update id="minusBookClassNum" parameterType="String">
+        update bookClass
+        set bookNum = bookNum-1
+        where ISBN = #{ISBN}
+    </update>
+
+    <delete id="deleteByISBN" parameterType="String">
+        delete from bookClass
+        where ISBN = #{ISBN}
+    </delete>
+
 </mapper>

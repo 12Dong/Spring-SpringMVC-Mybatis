@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<% String APP_PATH = request.getContextPath(); %>
+
 <html>
 <head>
     <title>用户空间</title>
@@ -47,11 +49,11 @@
             var readerId = document.getElementById("readerId").innerText;
 
             $(function() {
-                toPage(1);
+                toPage();
             })
 
             // =============到达某一页面=============
-            function toPage(num) {
+            function toPage() {
                 $.ajax({
                     url:"${APP_PATH}/readerQueryRendBook",
                     data: "readerId="+readerId,
@@ -82,6 +84,19 @@
                     $("<tr></tr>").append(bookId).append(bookName).append(status).append(btnTd).appendTo("#readerQuery_table tbody");
                 });
             }
+
+            $(document).on("click",".return_btn",function () {
+                $.ajax({
+                    url:"${APP_PATH}/readerReturnBook",
+                    type:"PUT",
+                    data:"bookId="+$(this).attr("bookId"),
+                    success:function (result) {
+                        alert("还书成功");
+                        console.log(result);
+                        toPage();
+                    }
+                })
+            });
         </script>
 </body>
 </html>

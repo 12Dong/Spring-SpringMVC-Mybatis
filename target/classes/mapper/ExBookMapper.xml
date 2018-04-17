@@ -124,4 +124,40 @@
         readerId = #{readerId}
     </select>
 
+    <update id="returnBookByBookId" parameterType="String">
+        update Book
+        set
+        status = '未借出',
+        managerId = NULL ,
+        readerId = NULL
+        where bookId = #{bookId}
+    </update>
+
+    <select id="selectLast" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        WHERE
+        ISBN = #{ISBN}
+        order by
+        bookId desc
+        limit 1;
+    </select>
+
+    <delete id="deleteByBookId" parameterType="String">
+        delete from Book
+        where bookId = #{bookId}
+    </delete>
+
+    <select id="selectByISBN" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        WHERE
+        ISBN = #{ISBN}
+    </select>
+
+
 </mapper>

@@ -60,8 +60,8 @@
     </delete>
 
     <insert id="insertReader" parameterType="Reader">
-        insert into reader(name,telephone,email)
-        VALUES (#{name},#{telephone},#{email})
+        insert into reader(readerId,name,telephone,email)
+        VALUES (#{readerId},#{name},#{telephone},#{email})
     </insert>
 
 </mapper>

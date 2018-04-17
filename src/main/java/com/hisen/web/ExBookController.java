@@ -2,8 +2,10 @@ package com.hisen.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hisen.entity.BookClass;
 import com.hisen.entity.ExBook;
 import com.hisen.entity.Message;
+import com.hisen.service.BookClassService;
 import com.hisen.service.ExBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ExBookController {
 
     @Autowired
     ExBookService exBookService;
+
+    @Autowired
+    BookClassService bookClassService;
 
     @RequestMapping(value="/ExBook/{ISBN}")
     public String toExBook(@PathVariable("ISBN") String ISBN, Model model)
@@ -55,5 +61,51 @@ public class ExBookController {
         exBookService.rendBook(bookId,readerId,managerId);
         return Message.success();
     }
+
+    @RequestMapping(value="/AddBook",method = RequestMethod.POST)
+    @ResponseBody
+    public Message renderBook(@RequestBody Map<String,String> map){
+        String ISBN = map.get("ISBN");
+        bookClassService.BookClassNumAdd1(ISBN);
+        String location = map.get("location");
+        ExBook exBook = exBookService.selectLastExBook(ISBN);
+        System.out.println(exBook.getBookId());
+        String[] newBookIdGroup = exBook.getBookId().split("[.]");
+        String newBookIdprefix = newBookIdGroup[0];
+        String newBookIdSuffix = String.valueOf(Integer.parseInt(newBookIdGroup[1])+1);
+        String bookId = newBookIdprefix+"."+newBookIdSuffix;
+        ExBook newExBook = new ExBook();
+        newExBook.setISBN(ISBN);
+        newExBook.setBookId(bookId);
+        newExBook.setLocation(location);
+        newExBook.setStatus("未借出");
+        exBookService.addNewBook(newExBook);
+        return Message.success();
+    }
+
+
+    @RequestMapping(value = "/ExBookManager/{ISBN}")
+    public String toBookListManger(@PathVariable("ISBN") String ISBN,Model model){
+        model.addAttribute("ISBN",ISBN);
+        return "bookListManager";
+    }
+
+    @RequestMapping(value = "/ExBookManager",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Message deleteBook(@RequestBody Map<String,String> map){
+        String bookId = map.get("bookId");
+        String ISBN = map.get("ISBN");
+        if(exBookService.searchNumByISBN(ISBN)!=1){
+            exBookService.deleteByBookId(bookId);
+            bookClassService.BookClassNumMinus1(ISBN);
+            return Message.success().add("bookClass",true);
+        }else{
+            exBookService.deleteByBookId(bookId);
+            bookClassService.deleteBookClassByISBN(ISBN);
+            return Message.success().add("bookClass",false);
+        }
+
+    }
+
 
 }

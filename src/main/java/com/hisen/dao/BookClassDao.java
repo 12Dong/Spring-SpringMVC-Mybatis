@@ -11,4 +11,7 @@ public interface BookClassDao {
     void updateById(BookClass bookClass);
     void deleteById(long id);
     void insertBookClass(BookClass bookClass);
+    void addBookClassNum(String ISBN);
+    void minusBookClassNum(String ISBN);
+    void deleteByISBN(String ISBN);
 }

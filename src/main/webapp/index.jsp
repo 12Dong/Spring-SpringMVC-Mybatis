@@ -333,7 +333,6 @@
         // 使用正则表达式分割
 
         var bookName = $("#bookName_add").val();
-        var regName = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,7}$)/;
         if(!regName.test(bookName)){
             // alert("用户名可以是2-5位中文或3-16英文数字");
             $("#bookName_add").parent().removeClass("has-success has-error");
@@ -525,6 +524,7 @@
                 })
             }
         })
+
 </script>
 </body>
 </html>

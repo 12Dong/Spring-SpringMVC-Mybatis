@@ -37,4 +37,30 @@ public class ExBookServiceImpl implements ExBookService{
     public List<ExBook> queryRendBookByReaderId(String readerId) {
         return exBookDao.queryRendBookByReaderId(readerId);
     }
+
+    @Override
+    public void returnBookByBookId(String bookId) {
+        exBookDao.returnBookByBookId(bookId);
+    }
+
+    @Override
+    public ExBook selectLastExBook(String ISBN) {
+        return exBookDao.selectLast(ISBN);
+    }
+
+    @Override
+    public void addNewBook(ExBook exBook) {
+        exBookDao.insertExBook(exBook);
+    }
+
+
+    @Override
+    public void deleteByBookId(String bookId) {
+        exBookDao.deleteByBookId(bookId);
+    }
+
+    @Override
+    public int searchNumByISBN(String ISBN) {
+        return exBookDao.selectByISBN(ISBN).size();
+    }
 }

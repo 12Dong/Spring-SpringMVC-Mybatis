@@ -5,7 +5,9 @@ public class Reader {
     private String name;
     private String telephone;
     private String email;
-
+    private long fine;
+    private String ISBN;
+    private String orderdate;
     public String getReaderId() {
         return readerId;
     }
@@ -36,6 +38,30 @@ public class Reader {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getFine() {
+        return fine;
+    }
+
+    public void setFine(long fine) {
+        this.fine = fine;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public String getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
     }
 
     @Override

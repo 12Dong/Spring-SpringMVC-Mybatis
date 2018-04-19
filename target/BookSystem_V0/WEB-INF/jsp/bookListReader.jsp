@@ -103,7 +103,13 @@
             // 为编辑按钮添加自定义 表现当前员工Id
             var rendBtn = $("<button></button>").addClass("btn btn-primary btn-sm render_btn").append("借阅");
             rendBtn.attr("bookId",item.bookId);
+
+            if(item.status==("已借出")|| item.status==("整理中")){
+                rendBtn.attr("disabled",true);
+            }
             var btnTd = $("<td></td>").append(rendBtn);
+
+
             $("<tr></tr>").append(bookId).append(location).append(status).append(managerId).append(readerId).append(btnTd).appendTo("#Book_table tbody");
         });
     }
@@ -155,6 +161,26 @@
 
     // 点击借阅按钮事件
     $(document).on("click",".render_btn",function () {
+        var fine = ${fine};
+        if(fine!=0){
+            alert("罚金没还");
+            return ;
+        }
+        if($(this).attr("disable")==true){
+            alert("已被借出");
+            return ;
+        }
+        $.ajax({
+            url:"${APP_PATH}/checkRenderable",
+            type:"POST",
+            success:function (result) {
+                if(result.extend.rendable==false){
+                    alert("借书数量超过十本 无法继续借书");
+                    return ;
+                }
+            }
+        })
+        alert("可以借书");
         $.ajax({
             url:"${APP_PATH}/Book/"+$(this).attr("bookId"),
             type:"PUT",

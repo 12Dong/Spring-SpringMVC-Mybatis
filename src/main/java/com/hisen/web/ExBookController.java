@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class ExBookController {
 
     @RequestMapping(value="/AddBook",method = RequestMethod.POST)
     @ResponseBody
-    public Message renderBook(@RequestBody Map<String,String> map){
+    public Message addBook(@RequestBody Map<String,String> map){
         String ISBN = map.get("ISBN");
         bookClassService.BookClassNumAdd1(ISBN);
         String location = map.get("location");
@@ -105,6 +106,18 @@ public class ExBookController {
             return Message.success().add("bookClass",false);
         }
 
+    }
+
+
+    @RequestMapping(value="/checkRenderable",method = RequestMethod.POST)
+    @ResponseBody
+    public Message checkBookNum(HttpSession session){
+        String readerId = (String)session.getAttribute("readerId");
+        if(exBookService.chechRendable(readerId)){
+            return Message.success().add("rendable",true);
+        }else{
+            return Message.success().add("rendable",false);
+        }
     }
 
 

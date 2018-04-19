@@ -1,6 +1,7 @@
 package com.hisen.service;
 
 import com.hisen.entity.ExBook;
+import com.hisen.entity.Reader;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +24,19 @@ public interface ExBookService {
     void deleteByBookId(String bookId);
 
     int searchNumByISBN(String ISBN);
+
+    void modifedBookInfo(ExBook exBook);
+
+    boolean chechRendable(String readerId);
+
+
+    long culcateFine(String bookId);
+
+    void updateOrderBookByBookId(String bookId);
+
+
+    boolean checkBookableByISBN(String ISBN);
+
+    Reader findOrderReaderByBookID(String bookId);
 
 }

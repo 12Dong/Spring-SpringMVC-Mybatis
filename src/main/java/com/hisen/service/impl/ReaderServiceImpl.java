@@ -18,4 +18,28 @@ public class ReaderServiceImpl implements ReaderService{
         readerDao.insertReader(reader);
     }
 
+    @Override
+    public void addReaderFine(Reader reader) {
+        readerDao.addFineByReaderId(reader);
+    }
+
+    @Override
+    public Reader findReaderById(long ReaderId) {
+        return readerDao.queryById(ReaderId);
+    }
+
+    @Override
+    public void payfine(String ReaderId) {
+        readerDao.payFineByReaderId(ReaderId);
+    }
+
+    @Override
+    public void orderBook(Reader reader) {
+        readerDao.orderBook(reader);
+    }
+
+    @Override
+    public void noticeReaderToGetOrder(String readerId) {
+        readerDao.noticeGetOrder(readerId);
+    }
 }

@@ -9,7 +9,8 @@
         readerId,
         name,
         telephone,
-        email
+        email,
+        fine
         FROM
         reader
         WHERE
@@ -60,8 +61,41 @@
     </delete>
 
     <insert id="insertReader" parameterType="Reader">
-        insert into reader(readerId,name,telephone,email)
-        VALUES (#{readerId},#{name},#{telephone},#{email})
+        insert into reader(readerId,name,telephone,email,fine)
+        VALUES (#{readerId},#{name},#{telephone},#{email},0)
     </insert>
 
+
+    <update id="addFineByReaderId" parameterType="Reader">
+        update  reader
+        set
+        fine = fine + #{fine}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="payFineByReaderId" parameterType="String">
+        update reader
+        SET
+        fine = '0'
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="orderBook" parameterType="Reader">
+        update reader
+        set
+        ISBN = #{ISBN},
+        ready = 0,
+        orderdate = #{orderdate}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="noticeGetOrder" parameterType="String">
+        update reader
+        set ready = '1'
+        where
+        readerId = #{readerId}
+    </update>
 </mapper>

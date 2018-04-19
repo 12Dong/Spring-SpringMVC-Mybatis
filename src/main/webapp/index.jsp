@@ -441,6 +441,7 @@
         });
 
     function getBook(id){
+
         $.ajax({
             url:"${APP_PATH}/book/"+id,
             type:"GET",
@@ -450,7 +451,7 @@
                 $("#bookName_update").val(book.name);
                 $("#bookNum_update").val(book.number);
                 $("#bookDetail_update").val(book.detail);
-                $("#bookUpdateModal select").val([parseInt(book.picId)]);
+                $("#bookUpdateModal select").val([parseInt(book.picId)])
             }
         })
     }

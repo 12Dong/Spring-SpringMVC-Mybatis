@@ -162,6 +162,7 @@
         }
 
         $("#bookClass_find_modal_btn").click(function () {
+
             $.ajax({
                 url:"${APP_PATH}/bookClassQuery",
                 dataType:"json",
@@ -185,7 +186,37 @@
 
         // 页面转向用事件
         $(document).on("click",".Book_btn",function () {
-            window.location.href='${APP_PATH}/ExBook/'+$(this).attr("ISBN");
+            var  ISBN = $(this).attr("isbn");
+            $.ajax({
+                async:false,
+                url:"${APP_PATH}/checkBookIsRendable",
+                type:"GET",
+                data:"ISBN="+ISBN,
+                success:function (result1) {
+                    alert(result1.extend.ISBN);
+                    if(result1.extend.able==true){
+                        alert("12Dong"+result1.extend.ISBN);
+                        window.location.href='${APP_PATH}/ExBook/'+result1.extend.ISBN;
+                    }else{
+
+                        if(confirm("此书 已被 全部借完 是否 预约?")){
+                            //确认 发送ajax请求
+                            alert(result1.extend.ISBN);
+                            $.ajax({
+                                async:false,
+                                url:"${APP_PATH}/orderBook",
+                                type:"GET",
+                                data:"ISBN="+result1.extend.ISBN,
+                                success:function (result2) {
+                                    console.log(result2 );
+                                    alert("预约成功");
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+
         });
 
     </script>

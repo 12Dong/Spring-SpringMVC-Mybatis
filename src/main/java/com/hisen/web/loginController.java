@@ -66,9 +66,10 @@ public class loginController {
         readerLogin.setUsername(username);
         readerLogin.setPassword(password);
         List<ReaderLogin> list = userService.login(readerLogin);
-        System.out.println(list.size());
         if(list.size()==0) return Message.fail();
         ReaderLogin readerLogin1 =  list.get(0);
+        Reader reader = readerService.findReaderById(Integer.parseInt(readerLogin1.getReaderId()));
+        session.setAttribute("fine",reader.getFine());
         session.setAttribute("readerId",readerLogin1.getReaderId());
         session.setAttribute("managerId","1");
         return Message.success();

@@ -21,6 +21,53 @@
     </div>
 </div>
 
+<%--书籍修改模态框--%>
+<div class="modal fade" id="bookUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">书籍修改</h4>
+            </div>
+            <div class="modal-body">
+                <%--=====================表单=====================    --%>
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="booId_update"  class="col-sm-2 control-label">bookId</label>
+                        <div class="col-sm-10">
+                            <input disabled='true' type="text" class="form-control" name="bookId" id="booId_update" placeholder="bookId">
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location_update"  class="col-sm-2 control-label">地点</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="location" id="location_update" placeholder="Location">
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <select class="form-control" name="status" id="status_select">
+                            <option value="1">已借出</option>
+                            <option value="2">未借出</option>
+                            <option valie="3">整理中</option>
+                        </select>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="book_save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%--显示 表格数据--%>
 <div class="row">
@@ -86,8 +133,8 @@
         $.each(Books,function(index,item) {
             //加入单元格
             var bookId = $("<td></td>").append(item.bookId);
-            var location = $("<td></td>").append(item.location);
-            var status = $("<td></td>").append(item.status);
+            var location = $("<td></td>").attr("id",item.bookId+' location').append(item.location);
+            var status = $("<td></td>").attr("id",item.bookId+' status').append(item.status);
             var managerId = $("<td></td>").append(item.managerId);
             var readerId = $("<td></td>").append(item.readerId);
             // 为编辑按钮添加自定义 表现当前员工Id
@@ -143,7 +190,40 @@
         <%--${"#page_nav_area"}.append(nav);--%>
         nav.appendTo("#page_nav_area");
     }
+    $(document).on("click",".update_btn",function(){
+        $("#booId_update").val($(this).attr("bookid"));
+        var loc_href = $(this).attr("bookid")+" location";
+        var loc = document.getElementById(loc_href).innerText;
+        $("#location_update").val(loc);
+        var status_href = $(this).attr("bookid")+" status";
+        var status = document.getElementById(status_href).innerText;
+        $("#status_select").val(status=='已借出'?1:(status=='未借出'?2:3));
+        $("#bookUpdateModal").modal({
+            backdrop:"static"
+        })
+    })
 
+
+    $("#book_save_btn").click(function () {
+        var options =$("#status_select option:selected");
+        var status = options.text();
+        $.ajax({
+            url:"${APP_PATH}/ExBookManager",
+            dataType:"json",
+            contentType : "application/json; charset=utf-8",
+            data:JSON.stringify({
+                bookId:$("#booId_update").val(),
+                location:$("#location_update").val(),
+                status:status,
+            }),
+            type:"POST",
+            success:function (result) {
+                alert("修改成功");
+                toPage(currentRecord);
+                $("#bookUpdateModal").modal('hide');
+            }
+        })
+    })
     $(document).on("click",".delete_btn",function () {
         //1.弹出是否确认删除
         var bookId= $(this).attr("bookId");
@@ -161,7 +241,7 @@
                 success:function (result) {
                     console.log(result);
                     alert("删除成功");
-                    if(result.extend.bookClass==true){
+                    if(result.extend.bookClass==false){
                         window.location.href='${APP_PATH}/bookClassManager'
                     }else{
                         toPage(currentRecord);

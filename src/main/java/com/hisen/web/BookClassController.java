@@ -2,18 +2,18 @@ package com.hisen.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hisen.entity.BookClass;
-import com.hisen.entity.ExBook;
-import com.hisen.entity.Manager;
-import com.hisen.entity.Message;
+import com.hisen.entity.*;
 import com.hisen.service.BookClassService;
 import com.hisen.service.ExBookService;
+import com.hisen.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,10 @@ public class BookClassController {
 
     @Autowired
     ExBookService exBookService;
+
+
+    @Autowired
+    ReaderService readerService;
 
     @RequestMapping(value="/bookClassReader")
     public String gotoBookClassReader(HttpSession session){
@@ -75,6 +79,29 @@ public class BookClassController {
     }
 
 
+    @RequestMapping(value="/ExBookManager",method = RequestMethod.POST)
+    @ResponseBody
+    public Message updateExBook(@RequestBody Map<String,String> map){
+        String bookId = map.get("bookId");
+        String location = map.get("location");
+        String status  = map.get("status");
+        if(status.equals("未借出")){
+            Reader reader = exBookService.findOrderReaderByBookID(bookId);
+            readerService.noticeReaderToGetOrder(reader.getReaderId());
+            exBookService.updateOrderBookByBookId(bookId);
+            return Message.success().add("message","成功转移预约");
+        }
+        else{
+            ExBook exBook = new ExBook();
+            exBook.setBookId(bookId);
+            exBook.setLocation(location);
+            exBook.setStatus(status);
+            exBookService.modifedBookInfo(exBook);
+        }
+        return Message.success();
+
+    }
+
     @RequestMapping(value="/bookClass",method = RequestMethod.POST)
     @ResponseBody
     public Message saveBookClass(@RequestBody Map<String,String> map){
@@ -105,6 +132,28 @@ public class BookClassController {
     }
 
 
+    @RequestMapping(value="/checkBookIsRendable",method = RequestMethod.GET)
+    @ResponseBody
+    public Message check(@RequestParam("ISBN")String ISBN){
+        System.out.println("checkabe  "+ISBN);
+        if(exBookService.checkBookableByISBN(ISBN)==true){
+            return Message.success().add("able",true);
+        }else{
+            return Message.success().add("able",false).add("ISBN",ISBN);
+        }
+    }
 
-
+    @RequestMapping(value="/orderBook",method = RequestMethod.GET)
+    @ResponseBody
+    public Message orderBook(@RequestParam("ISBN")String ISBN,HttpSession session){
+        String readerId = (String ) session.getAttribute("readerId");
+        System.out.println("order book"+ISBN);
+        Reader reader = new Reader();
+        reader.setReaderId(readerId);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        reader.setOrderdate(sdf.format(new Date()));
+        reader.setISBN(ISBN);
+        readerService.orderBook(reader);
+        return Message.success();
+    }
 }

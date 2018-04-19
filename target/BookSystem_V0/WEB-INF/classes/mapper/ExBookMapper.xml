@@ -85,7 +85,9 @@
         set
         managerId = #{managerId},
         readerId = #{readerId},
-        status = '已借出'
+        status = '已借出',
+        renddate = STR_TO_DATE(#{rendDate},"%Y-%m-%d") ,
+        renturndate = STR_TO_DATE(#{returnDate},"%Y-%m-%d")
         where bookId = #{bookId}
     </update>
 
@@ -106,6 +108,8 @@
         <id column="bookId" property="bookId"/>
         <result column="ISBN" property="ISBN"/>
         <result column="status" property="status"/>
+        <result column="renddate" property="renddate"/>
+        <result column="returndate" property="returndate"/>
         <association property="bookClass" javaType="BookClass">
             <id column="ISBN" property="ISBN"/>
             <result column="bookName" property="bookName"/>
@@ -116,7 +120,9 @@
         bookId,
         status,
         bookName,
-        Book.ISBN as ISBN
+        Book.ISBN as ISBN,
+        date_format(renddate,'%Y-%m-%d') AS renddate,
+        date_format(renturndate,'%Y-%m-%d') AS returndate
         from Book,bookClass
         where
         Book.ISBN = bookClass.ISBN
@@ -124,12 +130,23 @@
         readerId = #{readerId}
     </select>
 
+    <select id="returnBookBefore" parameterType="String" resultType="ExBook">
+        select
+        date_format(renddate,'%Y-%m-%d') AS renddate,
+        date_format(renturndate,'%Y-%m-%d') AS returndate
+        from Book
+        where
+        bookId = #{bookId}
+    </select>
+
     <update id="returnBookByBookId" parameterType="String">
         update Book
         set
-        status = '未借出',
+        status = '整理中',
         managerId = NULL ,
-        readerId = NULL
+        readerId = NULL,
+        renddate = null,
+        renturndate = null
         where bookId = #{bookId}
     </update>
 
@@ -143,6 +160,17 @@
         order by
         bookId desc
         limit 1;
+    </select>
+
+
+    <select id="selectNumofBook" parameterType="String" resultType="int">
+        select
+        count(*)
+        from
+        Book
+        WHERE
+        readerId = #{readerId}
+
     </select>
 
     <delete id="deleteByBookId" parameterType="String">
@@ -159,5 +187,44 @@
         ISBN = #{ISBN}
     </select>
 
+    <update id="modifiedExBook" parameterType="ExBook">
+        update Book
+        SET
+        location = #{location},
+        status = #{status}
+        where bookId = #{bookId}
+    </update>
 
+    <select id="checkExBookableByISBN" parameterType="String" resultType="ExBook">
+        select *
+        from Book
+        where
+        ISBN = #{ISBN}
+        and
+        status = '未借出'
+    </select>
+
+    <select id = "findOrderReaderByBookID" parameterType="String" resultType="Reader">
+        select
+        min(orderdate),reader.readerId
+        from
+        Book,reader
+        where
+        bookId = #{bookId}
+        and
+        Book.ISBN = reader.ISBN
+        group by orderdate,reader.readerId;
+    </select>
+
+    <update id="updateOrderBookByBookId" parameterType="String">
+        update Book
+        set
+        status = '预约中',
+        managerId = null,
+        readerId = null,
+        renddate = null,
+        renturndate = null
+        where
+        bookId = #{bookId}
+    </update>
 </mapper>

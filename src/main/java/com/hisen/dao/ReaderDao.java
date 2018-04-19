@@ -11,4 +11,13 @@ public interface ReaderDao {
     void deleteById(long id);
     void updateById(Reader reader);
     void insertReader(Reader reader);
+
+    void addFineByReaderId(Reader reader);
+
+    void payFineByReaderId(String readerId);
+
+    void orderBook(Reader reader);
+
+    void noticeGetOrder(String readerId);
+
 }

@@ -20,8 +20,12 @@
 </head>
 <body>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h1 id="readerId">${readerId}</h1>
+            </div>
+            <div class="col-md-6">
+                <h1>罚金:${fine}</h1>
+                <button class="btn btn-primary" id="fine_pay">偿还罚金</button>
             </div>
         </div>
 
@@ -34,6 +38,8 @@
                         <td>BookId</td>
                         <td>状态</td>
                         <td>书名</td>
+                        <td>借书日期</td>
+                        <td>还书日期</td>
                         <td>操作</td>
                     </tr>
                     </thead>
@@ -77,11 +83,13 @@
                     var bookId = $("<td></td>").append(item.bookId);
                     var bookName = $("<td></td>").append(item.bookClass.bookName);
                     var status = $("<td></td>").append(item.status);
+                    var renddate = $("<td></td>").append(item.renddate);
+                    var returndate = $("<td></td>").append(item.returndate);
                     // 为编辑按钮添加自定义 表现当前员工Id
                     var returnBtn = $("<button></button>").addClass("btn btn-primary btn-sm return_btn").append("还书");
                     returnBtn.attr("bookId",item.bookId);
                     var btnTd = $("<td></td>").append(returnBtn);
-                    $("<tr></tr>").append(bookId).append(bookName).append(status).append(btnTd).appendTo("#readerQuery_table tbody");
+                    $("<tr></tr>").append(bookId).append(bookName).append(status).append(renddate).append(returndate).append(btnTd).appendTo("#readerQuery_table tbody");
                 });
             }
 
@@ -97,6 +105,15 @@
                     }
                 })
             });
+
+            $("#fine_pay").click(function () {
+                $.ajax({
+                    url:"${APP_PATH}/pay_fine",
+                    success:function(result){
+                        alert("成功支付");
+                    }
+                })
+            })
         </script>
 </body>
 </html>

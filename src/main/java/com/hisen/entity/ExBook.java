@@ -7,6 +7,8 @@ public class ExBook {
     private String status;
     private String managerId;
     private String readerId;
+    private String renddate;
+    private String returndate;
 
     private BookClass bookClass;
 
@@ -60,6 +62,22 @@ public class ExBook {
 
     public BookClass getBookClass() {
         return bookClass;
+    }
+
+    public String getRenddate() {
+        return renddate;
+    }
+
+    public void setRenddate(String renddate) {
+        this.renddate = renddate;
+    }
+
+    public String getReturndate() {
+        return returndate;
+    }
+
+    public void setReturndate(String returndate) {
+        this.returndate = returndate;
     }
 
     public void setBookClass(BookClass bookClass) {

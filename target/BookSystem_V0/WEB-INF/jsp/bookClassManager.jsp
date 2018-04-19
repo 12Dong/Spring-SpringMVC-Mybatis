@@ -396,6 +396,7 @@
                 success:function (result) {
                     console.log(result);
                     toPage(currentRecord);
+                    $("#bookClassAddModal").modal('hide');
                 }
             })
         }

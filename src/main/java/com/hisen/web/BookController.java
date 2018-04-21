@@ -1,5 +1,7 @@
 package com.hisen.web;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hisen.entity.Book;
 import com.hisen.service.BookService;
 import java.util.List;
@@ -8,25 +10,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by hisen on 17-4-24.
  */
 @Controller
-@RequestMapping("/book")
+//@RequestMapping("/book")
 public class BookController {
 //  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private BookService bookService;
 
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
+//  查询书籍目录 分页查询
+  @RequestMapping("/Newlist")
+  private String list(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model) {
+    //引入分页插件
+    PageHelper.startPage(pn,5);
+    //startPage紧跟的查询 就是分页查询
+    List<Book> list = bookService.getListWithPic();
+//    使用pageInfo包装查询后结果
+    PageInfo page = new PageInfo(list,5);
+    //只需将pageInfo交给页面即可
+    model.addAttribute("pageInfo", page);
+    return "Newlist";// WEB-INF/jsp/"list".jsp
+  }
+  @RequestMapping("/list")
   private String list(Model model) {
-    List<Book> list = bookService.getListWithPic(0, 1000);
+    List<Book> list = bookService.getListWithPic();
     model.addAttribute("list", list);
     return "list";// WEB-INF/jsp/"list".jsp
   }

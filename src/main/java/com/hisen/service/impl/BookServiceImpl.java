@@ -33,9 +33,10 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<Book> getListWithPic(int start, int pageNum) {
-    return bookDao.queryAllWithPic(start, pageNum);
+  public List<Book> getListWithPic() {
+    return bookDao.queryAllWithPic();
   }
+
 
 
   @Override

@@ -14,6 +14,6 @@
 <br />
 网站：<a href="hisen.me" target="_blank">hisen.me</a>
 <br /><br /><br /><br />
-图书系统：<a href="<%=appPath%>/book/list">点击前往</a>
+图书系统：<a href="<%=appPath%>/list">点击前往</a>
 </body>
 </html>

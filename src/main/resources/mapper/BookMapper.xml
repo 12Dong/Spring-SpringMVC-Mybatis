@@ -78,7 +78,6 @@
     book.picId = pic.picId
     ORDER BY
     book_id
-    LIMIT #{offset}, #{limit}
   </select>
 
 

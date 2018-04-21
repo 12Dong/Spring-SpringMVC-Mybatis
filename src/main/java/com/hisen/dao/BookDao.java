@@ -11,7 +11,7 @@ public interface BookDao {
   Book queryById(long id);
   Book queryByIdWithPic(long id);
   List<Book> queryAll(@Param("offset") int offset, @Param("limit") int limit);
-  List<Book> queryAllWithPic(@Param("offset") int offset, @Param("limit") int limit);
+  List<Book> queryAllWithPic();
 
 
   int addBook(Book book);

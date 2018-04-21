@@ -61,8 +61,8 @@
     </delete>
 
     <insert id="insertReader" parameterType="Reader">
-        insert into reader(readerId,name,telephone,email,fine)
-        VALUES (#{readerId},#{name},#{telephone},#{email},0)
+        insert into reader(readerId,name,telephone,email,fine,ready)
+        VALUES (#{readerId},#{name},#{telephone},#{email},'0','0')
     </insert>
 
 

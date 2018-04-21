@@ -96,9 +96,9 @@ public class ExBookServiceImpl implements ExBookService{
         ExBook exBook = exBookDao.returnBookBefore(bookId);
         SimpleDateFormat smf = new SimpleDateFormat("yyyy-MM-dd");
         try{
-            Date rendDate = smf.parse(exBook.getRenddate());
+            Date realreturnDate = new Date();
             Date returnDate = smf.parse(exBook.getReturndate());
-            long day = (returnDate.getTime()-rendDate.getTime())/(24*60*60*1000);
+            long day = (realreturnDate.getTime()-returnDate.getTime())/(24*60*60*1000);
             if(day<=0) return 0;
             else{
                 long fine = day*1;

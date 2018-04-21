@@ -246,6 +246,9 @@
                 success:function (result) {
                     console.log(result);
                     if(result.code==100){
+                        if(result.extend.fine!=0){
+                            alert("预约书已到");
+                        }
                         window.location.href='${APP_PATH}/bookClassReader';
                     }else{
                         alert("用户名密码不匹配");

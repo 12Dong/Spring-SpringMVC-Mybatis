@@ -69,9 +69,13 @@ public class loginController {
         if(list.size()==0) return Message.fail();
         ReaderLogin readerLogin1 =  list.get(0);
         Reader reader = readerService.findReaderById(Integer.parseInt(readerLogin1.getReaderId()));
+
         session.setAttribute("fine",reader.getFine());
         session.setAttribute("readerId",readerLogin1.getReaderId());
         session.setAttribute("managerId","1");
+        if(reader.getReady()==1){
+            return Message.success().add("ready",true);
+        }
         return Message.success();
     }
 

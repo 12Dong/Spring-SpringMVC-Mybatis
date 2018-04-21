@@ -24,7 +24,7 @@
                 <h1 id="readerId">${readerId}</h1>
             </div>
             <div class="col-md-6">
-                <h1>罚金:${fine}</h1>
+                <h1 id="fine">罚金:${fine}</h1>
                 <button class="btn btn-primary" id="fine_pay">偿还罚金</button>
             </div>
         </div>
@@ -99,8 +99,10 @@
                     type:"PUT",
                     data:"bookId="+$(this).attr("bookId"),
                     success:function (result) {
+                        var fine = ${fine};
                         alert("还书成功");
                         console.log(result);
+                        $("#fine").val(fine)
                         toPage();
                     }
                 })

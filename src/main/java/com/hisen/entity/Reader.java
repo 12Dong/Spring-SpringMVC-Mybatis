@@ -8,6 +8,7 @@ public class Reader {
     private long fine;
     private String ISBN;
     private String orderdate;
+    private int ready;
     public String getReaderId() {
         return readerId;
     }
@@ -62,6 +63,15 @@ public class Reader {
 
     public void setOrderdate(String orderdate) {
         this.orderdate = orderdate;
+    }
+
+
+    public int getReady() {
+        return ready;
+    }
+
+    public void setReady(int ready) {
+        this.ready = ready;
     }
 
     @Override

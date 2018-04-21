@@ -86,8 +86,8 @@
         managerId = #{managerId},
         readerId = #{readerId},
         status = '已借出',
-        renddate = STR_TO_DATE(#{rendDate},"%Y-%m-%d") ,
-        renturndate = STR_TO_DATE(#{returnDate},"%Y-%m-%d")
+        renddate = STR_TO_DATE(#{renddate},"%Y-%m-%d") ,
+        renturndate = STR_TO_DATE(#{returndate},"%Y-%m-%d")
         where bookId = #{bookId}
     </update>
 

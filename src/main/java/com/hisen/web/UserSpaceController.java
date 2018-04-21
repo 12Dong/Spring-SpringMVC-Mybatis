@@ -30,7 +30,6 @@ public class UserSpaceController {
     @RequestMapping(value="/UserSpace")
     public String toUserSpace(HttpSession session){
         //假设 为 用户Id 1
-        session.setAttribute("readerId","1");
         return "UserSpace";
     }
 
@@ -48,6 +47,7 @@ public class UserSpaceController {
     public Message readerReturn(@RequestParam("bookId")String bookId,HttpSession session){
             System.out.println(bookId);
             long fine = exBookService.culcateFine(bookId);
+            System.out.println(session.getAttribute("readerId")+ "fine : " + fine);
             if(fine<=0) return Message.fail().add("reason","罚金为负");
             Reader reader = new Reader();
             reader.setReaderId((String)session.getAttribute("readerId"));
@@ -59,7 +59,7 @@ public class UserSpaceController {
             }else{
                 exBookService.returnBookByBookId(bookId);
             }
-            return Message.success();
+            return Message.success().add("fine",fine);
     }
 
     @RequestMapping(value="/pay_fine",method = RequestMethod.GET)

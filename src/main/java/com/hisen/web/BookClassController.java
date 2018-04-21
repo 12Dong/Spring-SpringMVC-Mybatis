@@ -85,11 +85,23 @@ public class BookClassController {
         String bookId = map.get("bookId");
         String location = map.get("location");
         String status  = map.get("status");
+        System.out.println("location:"+location);
         if(status.equals("未借出")){
             Reader reader = exBookService.findOrderReaderByBookID(bookId);
-            readerService.noticeReaderToGetOrder(reader.getReaderId());
-            exBookService.updateOrderBookByBookId(bookId);
-            return Message.success().add("message","成功转移预约");
+            if(reader==null){
+                ExBook exBook = new ExBook();
+                exBook.setBookId(bookId);
+                exBook.setLocation(location);
+                exBook.setStatus(status);
+                exBookService.modifedBookInfo(exBook);
+                return Message.success();
+
+            } else{
+                readerService.noticeReaderToGetOrder(reader.getReaderId());
+                exBookService.updateOrderBookByBookId(bookId);
+                return Message.success().add("message","成功转移预约");
+            }
+
         }
         else{
             ExBook exBook = new ExBook();
@@ -137,7 +149,7 @@ public class BookClassController {
     public Message check(@RequestParam("ISBN")String ISBN){
         System.out.println("checkabe  "+ISBN);
         if(exBookService.checkBookableByISBN(ISBN)==true){
-            return Message.success().add("able",true);
+            return Message.success().add("able",true).add("ISBN",ISBN);
         }else{
             return Message.success().add("able",false).add("ISBN",ISBN);
         }

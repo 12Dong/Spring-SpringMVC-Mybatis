@@ -15,6 +15,10 @@ public class BookServiceImpl implements BookService {
   @Autowired
   private BookDao bookDao;
 
+  @Override
+  public boolean checkBookName(String bookName) {
+    return bookDao.countByBookName(bookName)==0;
+  }
 
   @Override
   public Book getById(long bookId) {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ReaderLoginDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+
+    <insert id = "insertUser" useGeneratedKeys="true" keyProperty="readerId" parameterType="ReaderLogin">
+        insert INTO
+        readerpass(username,password)
+        values(#{username},#{password})
+    </insert>
+
+    <select id="selectReaderLogin" parameterType="ReaderLogin" resultType="ReaderLogin">
+        select * from readerpass
+        <where>
+            <if test="username !=null">
+                and username = #{username}
+            </if>
+            <if test="password !=null">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>

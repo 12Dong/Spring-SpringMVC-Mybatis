@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ManagerDao">
+    <select id="queryById" resultType="Manager" parameterType="long">
+        <!-- 具体的sql -->
+        SELECT
+        managerId,
+        name
+        FROM
+        manager
+        WHERE
+        managerId = #{managerId}
+    </select>
+    <select id="queryAll" resultType="Manager">
+        SELECT
+        managerId,
+        name
+        FROM
+        manager
+        ORDER BY
+        managerId
+    </select>
+
+    <select id="queryBySelective" parameterType="Manager" resultType="Manager">
+        select
+        *
+        from manager
+        <where>
+            <if test="name != null">
+                And name like '%${name}%'
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="Manager">
+        update manager
+        SET
+        name = #{name}
+        where
+        managerId = #{managerId}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        delete from manager
+        where managerId = #{managerId}
+
+    </delete>
+
+    <insert id="insertManager" parameterType="Manager">
+        insert into manager(name) VALUES (#{name})
+    </insert>
+
+</mapper>

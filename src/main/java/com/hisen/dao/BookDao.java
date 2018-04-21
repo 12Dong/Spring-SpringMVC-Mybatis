@@ -12,6 +12,7 @@ public interface BookDao {
   Book queryByIdWithPic(long id);
   List<Book> queryAll(@Param("offset") int offset, @Param("limit") int limit);
   List<Book> queryAllWithPic();
+  int countByBookName(String bookName);
 
 
   int addBook(Book book);

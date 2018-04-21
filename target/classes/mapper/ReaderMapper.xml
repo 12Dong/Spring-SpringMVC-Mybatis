@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ReaderDao">
+    <select id="queryById" resultType="Reader" parameterType="long">
+        <!-- 具体的sql -->
+        SELECT
+        readerId,
+        name,
+        telephone,
+        email,
+        fine
+        FROM
+        reader
+        WHERE
+        readerId = #{readerId}
+    </select>
+    <select id="queryAll" resultType="Reader">
+        SELECT
+        readerId,
+        name,
+        telephone,
+        email
+        FROM
+        reader
+        ORDER BY
+        readerId
+    </select>
+
+    <select id="queryBySelective" parameterType="Reader" resultType="Reader">
+        select
+        *
+        from reader
+        <where>
+            <if test="name != null">
+                And name like '%${name}%'
+            </if>
+            <if test="telephone !=null">
+                And telephone = #{telephone}
+            </if>
+            <if test="email !=null">
+                And email = #{email}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="Reader">
+        update reader
+        SET
+        name = #{name},
+        telephone = #{telephone},
+        email = #{email}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        delete from reader
+        where readerId = #{readerId}
+    </delete>
+
+    <insert id="insertReader" parameterType="Reader">
+        insert into reader(readerId,name,telephone,email,fine,ready)
+        VALUES (#{readerId},#{name},#{telephone},#{email},'0','0')
+    </insert>
+
+
+    <update id="addFineByReaderId" parameterType="Reader">
+        update  reader
+        set
+        fine = fine + #{fine}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="payFineByReaderId" parameterType="String">
+        update reader
+        SET
+        fine = '0'
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="orderBook" parameterType="Reader">
+        update reader
+        set
+        ISBN = #{ISBN},
+        ready = 0,
+        orderdate = #{orderdate}
+        where
+        readerId = #{readerId}
+    </update>
+
+    <update id="noticeGetOrder" parameterType="String">
+        update reader
+        set ready = '1'
+        where
+        readerId = #{readerId}
+    </update>
+</mapper>

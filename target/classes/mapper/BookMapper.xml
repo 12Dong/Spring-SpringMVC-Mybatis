@@ -80,20 +80,26 @@
     book_id
   </select>
 
+    <select id="countByBookName" resultType="int" parameterType="String">
+        select count(*)
+        from book
+        where book.name = #{name}
+    </select>
 
   <update id="updateBook" parameterType="Book">
     UPDATE book
-    SET NAME = #{name},
-    NUMBER = #{number},
-    detail = #{detail}
+    SET name = #{name},
+    number = #{number},
+    detail = #{detail},
+    picId = #{picId}
     WHERE
     book_id = #{bookId}
     AND number > 0
   </update>
 
   <insert id="addBook">
-    INSERT INTO book(`book_id`, `name`, `number`,`detail`)
-    VALUES(#{bookId}, #{name}, #{number}, #{detail})
+    INSERT INTO book(`book_id`, `name`, `number`,`detail`,`picId`)
+    VALUES(#{bookId}, #{name}, #{number}, #{detail},#{picId})
   </insert>
 
   <delete id="deleteBookById">

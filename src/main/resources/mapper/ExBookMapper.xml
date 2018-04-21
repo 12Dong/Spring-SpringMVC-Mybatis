@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisen.dao.ExBookDao">
+    <select id="queryById" resultType="ExBook" parameterType="String">
+        SELECT
+        *
+        from
+        Book
+        where
+        bookId = #{bookId}
+    </select>
+
+    <select id="queryAll" parameterType="String" resultType="ExBook">
+        SELECT
+        *
+        FROM
+        Book
+        where ISBN = #{ISBN}
+        ORDER BY
+        bookId
+    </select>
+
+    <select id="queryBySelective" parameterType="ExBook" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        <where>
+            <if test="bookId!=null">
+                and bookId = #{bookId}
+            </if>
+            <if test="ISBN !=null">
+                and ISBN = #{ISBN}
+            </if>
+            <if test="status !=null">
+                and status = #{status}
+            </if>
+            <if test="managerId !=null">
+                and managerId = #{managerId}
+            </if>
+            <if test="readerId !=null">
+                and readerId = #{readerId}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="ExBook">
+        update Book
+        SET
+        ISBN = #{ISBN},
+        location = #{ISBN},
+        status = #{status},
+        managerId = #{managerId},
+        readerId = #{readerId}
+        where
+        bookId = #{bookId}
+    </update>
+
+    <delete id="deleteById" parameterType="String">
+        delete from Book
+        where
+        bookId = #{bookId}
+    </delete>
+
+    <insert id="insertExBook" parameterType="ExBook">
+        insert into
+        Book(bookId,ISBN,location,status,managerId,readerId)
+        VALUES (#{bookId},#{ISBN},#{location},#{status},#{managerId},#{readerId})
+    </insert>
+
+    <select id="queryAllByISBN" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        where
+        ISBN = #{ISBN}
+        order by bookId
+    </select>
+
+    <update id="rendBook" parameterType="ExBook">
+        update Book
+        set
+        managerId = #{managerId},
+        readerId = #{readerId},
+        status = '已借出',
+        renddate = STR_TO_DATE(#{renddate},"%Y-%m-%d") ,
+        renturndate = STR_TO_DATE(#{returndate},"%Y-%m-%d")
+        where bookId = #{bookId}
+    </update>
+
+    <select id="queryALLablee" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        where
+        status = '未借出'
+        and
+        ISBN = #{ISBN}
+        order by
+        bookId
+    </select>
+
+    <resultMap id="ExBookWithBookClass" type="ExBook">
+        <id column="bookId" property="bookId"/>
+        <result column="ISBN" property="ISBN"/>
+        <result column="status" property="status"/>
+        <result column="renddate" property="renddate"/>
+        <result column="returndate" property="returndate"/>
+        <association property="bookClass" javaType="BookClass">
+            <id column="ISBN" property="ISBN"/>
+            <result column="bookName" property="bookName"/>
+        </association>
+    </resultMap>
+    <select id="queryRendBookByReaderId" parameterType="String" resultMap="ExBookWithBookClass">
+        select
+        bookId,
+        status,
+        bookName,
+        Book.ISBN as ISBN,
+        date_format(renddate,'%Y-%m-%d') AS renddate,
+        date_format(renturndate,'%Y-%m-%d') AS returndate
+        from Book,bookClass
+        where
+        Book.ISBN = bookClass.ISBN
+        and
+        readerId = #{readerId}
+    </select>
+
+    <select id="returnBookBefore" parameterType="String" resultType="ExBook">
+        select
+        date_format(renddate,'%Y-%m-%d') AS renddate,
+        date_format(renturndate,'%Y-%m-%d') AS returndate
+        from Book
+        where
+        bookId = #{bookId}
+    </select>
+
+    <update id="returnBookByBookId" parameterType="String">
+        update Book
+        set
+        status = '整理中',
+        managerId = NULL ,
+        readerId = NULL,
+        renddate = null,
+        renturndate = null
+        where bookId = #{bookId}
+    </update>
+
+    <select id="selectLast" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        WHERE
+        ISBN = #{ISBN}
+        order by
+        bookId desc
+        limit 1;
+    </select>
+
+
+    <select id="selectNumofBook" parameterType="String" resultType="int">
+        select
+        count(*)
+        from
+        Book
+        WHERE
+        readerId = #{readerId}
+
+    </select>
+
+    <delete id="deleteByBookId" parameterType="String">
+        delete from Book
+        where bookId = #{bookId}
+    </delete>
+
+    <select id="selectByISBN" parameterType="String" resultType="ExBook">
+        select
+        *
+        from
+        Book
+        WHERE
+        ISBN = #{ISBN}
+    </select>
+
+    <update id="modifiedExBook" parameterType="ExBook">
+        update Book
+        SET
+        location = #{location},
+        status = #{status}
+        where bookId = #{bookId}
+    </update>
+
+    <select id="checkExBookableByISBN" parameterType="String" resultType="ExBook">
+        select *
+        from Book
+        where
+        ISBN = #{ISBN}
+        and
+        status = '未借出'
+    </select>
+
+    <select id = "findOrderReaderByBookID" parameterType="String" resultType="Reader">
+        select
+        min(orderdate),reader.readerId
+        from
+        Book,reader
+        where
+        bookId = #{bookId}
+        and
+        Book.ISBN = reader.ISBN
+        group by orderdate,reader.readerId;
+    </select>
+
+    <update id="updateOrderBookByBookId" parameterType="String">
+        update Book
+        set
+        status = '预约中',
+        managerId = null,
+        readerId = null,
+        renddate = null,
+        renturndate = null
+        where
+        bookId = #{bookId}
+    </update>
+</mapper>

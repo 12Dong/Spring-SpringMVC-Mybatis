@@ -1,6 +1,8 @@
 package com.hisen.service;
 
 import com.hisen.entity.Book;
+import com.hisen.entity.Message;
+
 import java.util.List;
 
 /**
@@ -13,6 +15,9 @@ public interface BookService {
   List<Book> getList(int start, int pageNum);
   List<Book> getListWithPic();
   int addBook(Book book);
-  int updateBook(Book book);
+
+  boolean checkBookName(String bookName);
+
+    int updateBook(Book book);
   int deleteBookById(long id);
 }

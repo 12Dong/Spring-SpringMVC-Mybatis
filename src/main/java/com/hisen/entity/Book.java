@@ -1,10 +1,14 @@
 package com.hisen.entity;
 
+import javax.validation.constraints.Pattern;
+
 /**
  * Created by hisen on 17-4-24.
  */
 public class Book {
+
   private long bookId;
+  @Pattern(regexp = "(^[a-zA-Z0-9_-]{3,16}$)|(^[\\u2E80-\\u9FFF]{2,7}$)",message="用户名可以是2-7位中文或3-16英文数字")
   private String name;
   private int number;
   private String detail;
